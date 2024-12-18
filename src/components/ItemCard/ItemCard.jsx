@@ -6,11 +6,7 @@ import {
   Image,
   Badge,
   useColorModeValue,
-  Icon,
-  chakra,
-  Tooltip,
 } from '@chakra-ui/react';
-import { FiShoppingCart } from 'react-icons/fi';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
@@ -42,49 +38,54 @@ const Rating = ({ rating, numReviews }) => {
 export const ItemCard = ({ data }) => {
   return (
     <Link to={`/item/${data.id}`}>
-    <Box
-      bg={useColorModeValue('white', 'gray.800')}
-      maxW="xs"
-      borderWidth="1px"
-      rounded="lg"
-      shadow="lg"
-      position="relative"
-      w="240px"
-      h="380px"
-      m={4} 
-    >
-      {data.isNew && (
-        <Circle size="10px" position="absolute" top={2} right={2} bg="red.200" />
-      )}
+      <Box
+        bg={useColorModeValue('white', 'gray.800')}
+        maxW="xs"
+        borderWidth="1px"
+        rounded="lg"
+        shadow="lg"
+        position="relative"
+        w="240px"
+        h="380px"
+        m={4}
+      >
+        {data.isNew && (
+          <Circle size="10px" position="absolute" top={2} right={2} bg="red.200" />
+        )}
 
-      <Image src={data.thumbnail} alt={`Picture of ${data.name}`} roundedTop="lg" objectFit="cover" />
+        <Image 
+          src={data.thumbnail} 
+          alt={`Picture of ${data.name}`} 
+          roundedTop="lg" 
+          objectFit="cover" 
+        />
 
-      <Box p="5">
-        <Box display="flex" alignItems="baseline">
-          {data.isNew && (
-            <Badge rounded="full" px="2" fontSize="0.9em" colorScheme="red">
-              New
-            </Badge>
-          )}
-        </Box>
-
-        <Flex mt="1" justifyContent="space-between" alignContent="center">
-          <Box fontSize="xl" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-            {data.name}
+        <Box p="5">
+          <Box display="flex" alignItems="baseline">
+            {data.isNew && (
+              <Badge rounded="full" px="2" fontSize="0.9em" colorScheme="red">
+                New
+              </Badge>
+            )}
           </Box>
-        </Flex>
 
-        <Flex justifyContent="space-between" alignContent="center">
-          <Rating rating={data.rating} numReviews={data.reviews.length} />
-          <Box fontSize="xl" color={useColorModeValue('gray.800', 'white')}>
-            <Box as="span" color={'gray.600'} fontSize="lg">
-              $
+          <Flex mt="1" justifyContent="space-between" alignContent="center">
+            <Box fontSize="xl" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+              {data.name}
             </Box>
-            {data.price.toFixed(2)}
-          </Box>
-        </Flex>
+          </Flex>
+
+          <Flex justifyContent="space-between" alignContent="center">
+            <Rating rating={data.rating} />
+            <Box fontSize="xl" color={useColorModeValue('gray.800', 'white')}>
+              <Box as="span" color={'gray.600'} fontSize="lg">
+                $
+              </Box>
+              {data.price.toFixed(2)}
+            </Box>
+          </Flex>
+        </Box>
       </Box>
-    </Box>
     </Link>
   );
 };
